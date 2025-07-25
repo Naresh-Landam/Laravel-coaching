@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ReplacementOrderApiController;
+
 // Equivalent of Route::apiResource()
 Route::get('/replacement-orders', [ReplacementOrderApiController::class, 'index']);
 Route::post('/replacement-orders', [ReplacementOrderApiController::class, 'store']);
@@ -10,3 +12,9 @@ Route::put('/replacement-orders/{id}', [ReplacementOrderApiController::class, 'u
 Route::delete('/replacement-orders/{id}', [ReplacementOrderApiController::class, 'destroy']);
 
 //Route::apiResource('replacement-orders', ReplacementOrderApiController::class);  instead of that four methods separate  you can use single line 
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->group(function () {
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::apiResource('replacement-orders', ReplacementOrderApiController::class);
+});
