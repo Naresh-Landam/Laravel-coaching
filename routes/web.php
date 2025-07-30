@@ -10,6 +10,8 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReplacementOrderController;
+use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'welcome']);
 Route::get('/hello', [HelloController::class, 'greet']);
@@ -22,3 +24,16 @@ Route::get('/order/{id}/edit', [ReplacementOrderController::class, 'edit'])->nam
 Route::post('/order/{id}/update', [ReplacementOrderController::class, 'update'])->name('orders.update');
 // Route::post('/order/{id}/delete', [ReplacementOrderController::class, 'destroy'])->name('orders.destroy');
 Route::delete('/order/{id}', [ReplacementOrderController::class, 'destroy'])->name('orders.destroy');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth');
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
