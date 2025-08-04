@@ -15,10 +15,10 @@ export default {
 
 
 
-         </script> -->    
+         </script> -->
 
 
-                                                        v-bind   
+v-bind
 
 <!-- <template>
   <div>
@@ -40,7 +40,7 @@ function changeImage() {
   imageUrl.value = "https://t3.ftcdn.net/jpg/13/69/15/62/360_F_1369156252_Cvf0Eu8IhuRB7oALnDs7nHE5KTm3DGhC.jpg";
 }
 </script> -->
-                      v-model
+v-model
 <!-- <template>
   <div>
     <input v-model="text" placeholder="Enter your name" />
@@ -55,7 +55,7 @@ const text = ref(''); // ✅ Matches v-model and {{ text }}
 </script> -->
 
 
-               v-if, v-else-if, v-else.
+v-if, v-else-if, v-else.
 <!-- 
  <template>
   <div>
@@ -73,7 +73,7 @@ import { ref } from 'vue';
 const showOffer = ref(true); // Initially not logged in
 </script> -->
 
-                       v-for
+v-for
 <!-- 
    <template>
   <div>
@@ -97,8 +97,8 @@ const cartItems = ref([
 ])
 </script> -->
 
- 
-                               v- show
+
+v- show
 <!-- <template>
   <div>
     <button @click="show = !show">Toggle Message</button>
@@ -111,11 +111,11 @@ import { ref } from 'vue'
 
 const show = ref(true)
 </script> -->
-                                   v-on
-                         <!-- <button v-on:click="sayHi">Click</button> -->
-                     vue -events
+v-on
+<!-- <button v-on:click="sayHi">Click</button> -->
+vue -events
 
-                     <!-- <template>
+<!-- <template>
   <div>
     <h2>👆 Counter Example</h2>
     <p>You clicked the button {{ count }} times.</p>
@@ -133,10 +133,12 @@ function incrementCount() {
 }
 </script> -->
 
-<template>
+<!-- <template>
   <div>
-    <button @click="sayHello">Click Me</button>
-    <p>{{ message }}</p>
+    <button @click="cart">Add to cart</button>
+    <button @click="clearCart">Clear Cart</button>
+    <h1>{{ message }}</h1>
+    <h1>{{ news }}</h1>
   </div>
 </template>
 
@@ -144,11 +146,179 @@ function incrementCount() {
 import { ref } from 'vue'
 
 const message = ref('')
+const news = ref('')
 
-const sayHello = () => {
-  message.value = 'Hello from Vue!'
+const cart = () => {
+  message.value = 'Product added to cart!'
+  news.value = ''
 }
+
+const clearCart = () => {
+  message.value = ''
+  news.value = '🛒 Cart is now empty!'
+}
+</script> -->
+
+
+<!-- <template>
+  <div>
+    <input v-model="price" type="number" />
+    <button @click="applyDiscount">Apply Discount</button>
+    <p>{{ discountedPriceMessage }}</p>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const price = ref('')
+const discountedPriceMessage = ref('')
+
+function applyDiscount() {
+  if (price.value > 100) {
+    discountedPriceMessage.value = `Discounted Price: $${price.value * 0.8}`
+  } else {
+    discountedPriceMessage.value = 'No discount available'
+  }
+}
+</script> -->
+
+
+<!-- 
+  <template>
+  <form @submit.prevent="submitForm">
+    <input v-model="name" placeholder="Enter your name" />
+    <button type="submit">Submit</button>
+  </form>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const name = ref('')
+
+function submitForm() {
+  alert(`Hello, ${name.value}`)
+}
+</script> -->
+
+
+              computed properties
+
+ <!-- <template>
+  <input v-model="firstName" placeholder="First Name" />
+  <input v-model="lastName" placeholder="Last Name" />
+  <p>Your full name is: {{ fullName }}</p>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+
+const firstName = ref('')
+const lastName = ref('')
+
+const fullName = computed(() => {
+  return `${firstName.value} ${lastName.value}`
+})
+</script> -->
+
+<!-- App.vue -->
+
+
+<!-- 
+<template>
+  <div style="padding: 20px">
+    <h2>👤 User Info</h2>
+
+    <input v-model="firstName" placeholder="First Name" />
+    <input v-model="lastName" placeholder="Last Name" />
+
+    <p>Full Name (Computed): <strong>{{ fullName }}</strong></p>
+
+    <button @click="showFullName">Show Full Name</button>
+  </div>
+</template>
+
+ <script setup>
+import { ref, computed } from 'vue'
+
+// Reactive data
+const firstName = ref('')
+const lastName = ref('')
+
+// Computed property
+const fullName = computed(() => {
+  return `${firstName.value} ${lastName.value}`.trim()
+})
+
+// Method
+function showFullName() {
+  alert(`Full name is: ${fullName.value}`)
+}
+</script>  -->
+                  <!-- //watcher
+<template>
+  <div>
+    <input v-model="searchTerm" placeholder="Type to search..." />
+    <p v-if="loading">🔍 Searching for "{{ searchTerm }}"...</p>
+  </div>
+</template>
+
+<script setup>
+import { ref, watch } from 'vue'
+
+const searchTerm = ref('')
+const loading = ref(false)
+
+watch(searchTerm, (newVal, oldVal) => {
+  if (newVal !== '') {
+    loading.value = true
+
+    setTimeout(() => {
+      loading.value = false
+    }, 1000) // Simulate 1 second delay
+  }
+})
+</script> -->
+
+
+<!-- <template>
+  <div>
+    <h2>🛍 Product: Headphones</h2>
+    <input type="number" v-model="quantity" />
+    <p>Price per item: ${{ price }}</p>
+    <p>Total Price: ${{ totalPrice }}</p>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+
+const price = ref(1200)
+const quantity = ref(1)
+
+const totalPrice = computed(() => {
+  return price.value * quantity.value
+})
+</script> -->
+<template>
+  <div>
+    <h2>Product: Headphones</h2>
+    
+    <input type="number" v-model="quantity" min="1" />  
+    
+    <p>Price per item: ${{ price }}</p>
+    <p>Total price: ${{ totalPrice }}</p>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+
+const price = ref(112)
+const quantity = ref(1)
+
+const totalPrice = computed(() => {
+  return price.value * quantity.value
+})
 </script>
-
-
-                             
